@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BugTracker.Model.Database.Bug>
+
+<div class="container">
+    <section class="content">
+        <div class="row justify-content-center">
+            <!-- BEGIN TICKET -->
+            <div class="col-md-9">
+                <div class="grid support-content">
+                    <div class="grid-body text-info">
+                        <h2>Dev-Area: Tickets</h2>
+                        <hr>
+                        <!--
+    <div class="btn-group">
+        <button type="button" class="btn btn-default active">162 Open</button>
+        <button type="button" class="btn btn-default">95,721 Closed</button>
+    </div>
+        -->
+                        <!--
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> Sort: <strong>Newest</strong> <span class="caret"></span></button>
+        <ul class="dropdown-menu fa-padding" role="menu">
+            <li><a href="#"><i class="fa fa-check"></i> Newest</a></li>
+            <li><a href="#"><i class="fa"> </i> Oldest</a></li>
+            <li><a href="#"><i class="fa"> </i> Recently updated</a></li>
+            <li><a href="#"><i class="fa"> </i> Least recently updated</a></li>
+            <li><a href="#"><i class="fa"> </i> Most commented</a></li>
+            <li><a href="#"><i class="fa"> </i> Least commented</a></li>
+        </ul>
+      </div>
+        -->
+                        <div class="padding"></div>
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <!-- BEGIN TICKET CONTENT -->
+                                <div class="col-md-12">
+                                    <ul class="list-group fa-padding">
+                                        <li class="list-group-item" data-toggle="modal" data-target="#issue">
+                                            <div class="media">
+                                                <i class="fa fa-cog pull-left"></i>
+                                                <div class="media-body">
+                                                    <strong>
+                                                        <a asp-action="DevDetails"
+                                                           asp-controller="Home"
+                                                           asp-route-id="@item.BugId">@item.Titel</a>
+                                                    </strong>
+                                                    <span class="number pull-right"># @item.BugId</span>
+                                                    <p class="info">
+                                                        Opened by
+                                                        <a asp-action="DevMaDetails"
+                                                           asp-controller="Home"
+                                                           asp-route-id="@item.MitarbeiterTestId">@item.MitarbeiterTest.Vorname @item.MitarbeiterTest.Nachname</a>
+                                                        @item.Anlagedatum
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- END TICKET CONTENT -->
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END TICKET -->
+        </div>
+    </section>
+</div>

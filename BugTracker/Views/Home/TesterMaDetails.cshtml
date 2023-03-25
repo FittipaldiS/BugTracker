@@ -1,0 +1,38 @@
+﻿@model BugTracker.Model.Database.Mitarbeiter
+
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card border-success">
+            <div class="card-header">
+                <div class="card-title">
+                    <p>
+                        <span class="pull-right">
+                            <a class="text-dark" asp-action="TesterBuglist" asp-controller="Home">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                </svg>
+                            </a>
+                        </span>
+                    </p>
+                    <h3 class="text-success">Gemeldet von:</h3>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">Verantwortlicher Tester:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Vorname) @Html.DisplayFor(model => model.Nachname)</dd>
+                    <dt class="col-sm-4">Arbeitet in Abteilung:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Abteilung)</dd>
+                    <dd class="col-sm-8 offset-sm-4"></dd>
+                    <dd class="col-sm-8 offset-sm-4"></dd>
+                </dl>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer text-muted">
+
+            </div>
+        </div>
+    </div>
+</div>

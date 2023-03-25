@@ -1,0 +1,77 @@
+﻿@model BugTracker.Model.Database.Mitarbeiter
+
+@{
+    Layout = "/Views/Admin/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Admin">Home</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Mitarbeiters">Mitarbeiter</a></li>
+                        <li class="breadcrumb-item active">Editieren</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="card card-primary" style="width: 100%">
+                    <div class="card-header">
+                        <h3 class="card-title">Mitarbeiter bearbeiten</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="MitarbeiterId" />
+                            <div class="form-group">
+                                <label asp-for="Vorname" class="control-label"></label>
+                                <input asp-for="Vorname" class="form-control" />
+                                <span asp-validation-for="Vorname" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Nachname" class="control-label"></label>
+                                <input asp-for="Nachname" class="form-control" />
+                                <span asp-validation-for="Nachname" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Abteilung" class="control-label"></label>
+                                <input asp-for="Abteilung" class="form-control" />
+                                <span asp-validation-for="Abteilung" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- right col -->
+</div>
+<!-- /.row (main row) -->
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

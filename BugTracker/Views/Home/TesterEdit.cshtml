@@ -1,0 +1,65 @@
+﻿@model BugTracker.Model.Database.Bug
+
+<div class="row justify-content-center">
+    <div class="card w-50 border-success">
+        <div class="card-header">
+
+            <span class="pull-right">
+                <a class="text-dark" asp-action="TesterBuglist">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                    </svg>
+                </a>
+            </span>
+
+            <h3 class="text-success">Eintrag anpassen</h3>
+
+        </div>
+        <div class="row">
+            <div class="card-body">
+                <form asp-action="TesterEdit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="BugId" />
+                    <div class="form-group">
+                        <label asp-for="Titel" class="control-label"></label>
+                        <input asp-for="Titel" class="form-control" />
+                        <span asp-validation-for="Titel" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Beschreibung" class="control-label"></label>
+                        <input asp-for="Beschreibung" class="form-control" />
+                        <span asp-validation-for="Beschreibung" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Anlagedatum" class="control-label"></label>
+                        <input asp-for="Anlagedatum" class="form-control" />
+                        <span asp-validation-for="Anlagedatum" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProjektId" class="control-label">Projekt</label>
+                        <select asp-for="ProjektId" class="form-control" asp-items="ViewBag.ProjektId"></select>
+                        <span asp-validation-for="ProjektId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MitarbeiterTestId" class="control-label">Verantwortlicher Tester</label>
+                        <select asp-for="MitarbeiterTestId" class="form-control" asp-items="ViewBag.MitarbeiterTestId"></select>
+                        <span asp-validation-for="MitarbeiterTestId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MitarbeiterDevId" class="control-label">Verantwortlicher Entwickler</label>
+                        <select asp-for="MitarbeiterDevId" class="form-control" asp-items="ViewBag.MitarbeiterDevId" disabled></select>
+                        <span asp-validation-for="MitarbeiterDevId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Änderungen bestätigen" class="btn btn-outline-success w-100" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

@@ -1,0 +1,343 @@
+﻿@model BugTracker.Model.ViewModels.AdminIndexViewModel
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>@(Model.Bugliste.Count() + Model.BuglisteOhne.Count())</h3>
+                            @if (Model.Bugliste.Count()  == 1)
+                            {
+                                <p>Bug</p>
+                            }
+                            else
+                            {
+                                <p>Bugs</p>
+                            }
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a asp-action="Index" asp-controller="Bugs" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>@Model.Mitarbeiterliste.Count()</h3>
+                            <p>Mitarbeiter</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>@Model.Projektliste.Count()</h3>
+                            @if (Model.Projektliste.Count() == 1)
+                            {
+                                <p>Projekt</p>
+                            }
+                            else
+                            {
+                                <p>Projekte</p>
+                            }
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>@Model.Abteilung.Count()</h3>
+
+                            <p>Abteilungen</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-7 connectedSortable">
+
+                    <!-- Card Bugliste-->
+                    <div class="card" style="height: 800px">
+                        <div class="card-header">
+                            <h3 class="card-title">Bugliste</h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Titel</th>
+                                        <th>Tester</th>
+                                        <th>Datum</th>
+                                        <th>Projekt</th>
+                                        <th>Entwickler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Bugliste)
+                                    {
+                                        @if (item.MitarbeiterDev != null)
+                                        {
+                                            <tr>
+                                                <td>@item.BugId</td>
+                                                <td>@item.Titel</td>
+                                                <td>@item.MitarbeiterTest.Vorname @item.MitarbeiterTest.Nachname</td>
+                                                <td>@item.Anlagedatum.ToShortDateString()</td>
+                                                <td>@item.Projekt.Projektname</td>
+                                                <td>@item.MitarbeiterDev.Vorname @item.MitarbeiterDev.Nachname </td>
+                                            </tr>
+
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card Bugtliste -->
+
+                </section>
+                <!-- /.Left col -->
+                <!--BugList Ohne-->
+                <section class="col-lg-7 connectedSortable">
+
+                    <!-- Card Bugliste-->
+                    <div class="card" style="height: 800px">
+                        <div class="card-header">
+                            <h3 class="card-title">Bugliste</h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Titel</th>
+                                        <th>Tester</th>
+                                        <th>Datum</th>
+                                        <th>Projekt</th>
+                                        <th>Entwickler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.BuglisteOhne)
+                                    {
+                                        @if (item.MitarbeiterDev == null)
+                                        {
+                                            <tr>
+                                                <td>@item.BugId</td>
+                                                <td>@item.Titel</td>
+                                                <td>@item.MitarbeiterTest.Vorname @item.MitarbeiterTest.Nachname</td>
+                                                <td>@item.Anlagedatum.ToShortDateString()</td>
+                                                <td>@item.Projekt.Projektname</td>
+                                                <td>Nicht zugeordnet</td>
+                                            </tr>
+
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card Bugtliste -->
+
+                </section>
+                <!--BugListOhne ENDE-->
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <section class="col-lg-5 connectedSortable">
+                    <!-- Card Mitarbeiterliste-->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Mitarbeiterliste</h3>
+                            <div class="card-tools">
+                                <form asp-controller="Admin" asp-action="Index">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" name="SearchString" class="form-control float-right" placeholder="Search">
+                                        <div class="input-group-append">
+                                            <button type="submit" value="Search" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Mitarbeiter</th>
+                                        <th>Abteilung</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Mitarbeiterliste)
+                                    {
+                                        <tr>
+                                            <td>@item.MitarbeiterId</td>
+                                            <td>@item.Vorname @item.Nachname </td>
+                                            <td>@item.Abteilung</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card Mitarbeiterliste -->
+                    <!-- Card Projektliste-->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Projektliste</h3>
+
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Projektname</th>
+                                        <th>Enddatum</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Projektliste)
+                                    {
+                                        <tr>
+                                            <td>@item.ProjektId</td>
+                                            <td>@item.Projektname</td>
+                                            <td>@item.Enddatum</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card Projektliste -->
+                    <!-- Calendar -->
+                    <div class="card bg-gradient-success">
+                        <div class="card-header border-0">
+
+                            <h3 class="card-title">
+                                <i class="far fa-calendar-alt"></i>
+                                Calendar
+                            </h3>
+                            <!-- tools card -->
+                            <div class="card-tools">
+                                <!-- button with a dropdown -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                                    <div class="dropdown-menu" role="menu">
+                                        <a href="#" class="dropdown-item">Add new event</a>
+                                        <a href="#" class="dropdown-item">Clear events</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="#" class="dropdown-item">View calendar</a>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <!-- /. tools -->
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body pt-0">
+                            <!--The calendar -->
+                            <div id="calendar" style="width: 100%"></div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </section>
+                <!-- right col -->
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
